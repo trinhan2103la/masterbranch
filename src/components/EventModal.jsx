@@ -7,6 +7,9 @@ import {
   Bookmark,
   Check,
   Trash,
+  Timer,
+  Link,
+  Link2,
 } from 'lucide-react';
 import GlobalContext from '../context/GlobalContext';
 
@@ -28,6 +31,14 @@ const EventModal = () => {
   const [description, setDescription] = useState(
     selectedEvent ? selectedEvent.description : ''
   );
+  const [startTime, setStartTime] = useState(
+    selectedEvent ? selectedEvent.startTime : ''
+  );
+  const [endTime, setEndTime] = useState(
+    selectedEvent ? selectedEvent.endTime : ''
+  );
+  const [url, setUrl] = useState(selectedEvent ? selectedEvent.url : '');
+
   const [selectedLabel, setSelectedLabel] = useState(
     selectedEvent
       ? labelsClasses.find((lbl) => lbl === selectedEvent.label)
@@ -39,6 +50,9 @@ const EventModal = () => {
     const calendarEvent = {
       title,
       description,
+      startTime,
+      endTime,
+      url,
       label: selectedLabel,
       day: daySelected.valueOf(),
       id: selectedEvent ? selectedEvent.id : Date.now(),
@@ -94,6 +108,28 @@ const EventModal = () => {
             </span>
             <p>{daySelected.format('dddd,MMMM DD')}</p>
             <span className="text-gray-500">
+              <Timer />
+            </span>
+            <input
+              onChange={(e) => setStartTime(e.target.value)}
+              type="time"
+              name="startTime"
+              required
+              value={startTime}
+              className="pt-3 border-0 text-gray-600 text-xl font-semibold pb-2 w-full border-b-2 border-gray-200 focus:outline-none focus:ring-0 foucs:border-blue-500 "
+            />
+            <span className="text-gray-500">
+              <Timer />
+            </span>
+            <input
+              onChange={(e) => setEndTime(e.target.value)}
+              type="time"
+              name="endTime"
+              required
+              value={endTime}
+              className="pt-3 border-0 text-gray-600 text-xl font-semibold pb-2 w-full border-b-2 border-gray-200 focus:outline-none focus:ring-0 foucs:border-blue-500 "
+            />
+            <span className="text-gray-500">
               <ChartNoAxesGantt />
             </span>
             <input
@@ -105,6 +141,33 @@ const EventModal = () => {
               value={description}
               className="pt-3 border-0 text-gray-600 pb-2 w-full border-b-2 border-gray-200 focus:outline-none focus:ring-0 foucs:border-blue-500 "
             />
+            <span className="text-gray-500">
+              <Link />
+            </span>
+            <input
+              onChange={(e) => setUrl(e.target.value)}
+              type="text"
+              name="url"
+              placeholder="Add Event URL"
+              value={url}
+              className="pt-3 border-0 text-gray-600 pb-2 w-full border-b-2 border-gray-200 focus:outline-none focus:ring-0 foucs:border-blue-500"
+            />
+
+            {url && (
+              <>
+                <span className="text-gray-500">
+                  <Link2 />
+                </span>
+                <a
+                  href={url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-500 underline"
+                >
+                  Open Event Link
+                </a>
+              </>
+            )}
             <span className="text-gray-500">
               <Bookmark />
             </span>

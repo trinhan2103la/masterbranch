@@ -4,7 +4,7 @@ import Day from './Day';
 
 const Month = ({ month }) => {
   return (
-    <div className=" flex flex-col flex-1">
+    <div className="flex flex-col flex-1 ">
       {/* Hàng tiêu đề ngày */}
       <div className="grid grid-cols-7 h-10">
         {['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'].map((day, index) => (

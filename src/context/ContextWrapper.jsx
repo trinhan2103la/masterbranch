@@ -17,7 +17,41 @@ function savedEventsReducer(state, { type, payload }) {
 
 function initEvents() {
   const storageEvents = localStorage.getItem('savedEvents');
-  return storageEvents ? JSON.parse(storageEvents) : [];
+  if (storageEvents) {
+    return JSON.parse(storageEvents);
+  }
+  return [
+    {
+      id: 1,
+      title: 'Họp nhóm dự án',
+      description: 'Thảo luận tiến độ và kế hoạch tiếp theo.',
+      startTime: '10:00',
+      endTime: '11:30',
+      label: 'bg-indigo-500',
+      day: dayjs('2025-02-15').valueOf(),
+      url: '',
+    },
+    {
+      id: 2,
+      title: 'Deadline bài tập',
+      description: 'Nộp bài trước thời hạn.',
+      startTime: '23:59',
+      endTime: '23:59',
+      label: 'bg-red-500',
+      day: dayjs('2025-03-28').valueOf(),
+      url: '',
+    },
+    {
+      id: 3,
+      title: 'Sự kiện công ty',
+      description: 'Gala dinner công ty, có tiệc buffet.',
+      startTime: '18:00',
+      endTime: '21:00',
+      label: 'bg-orange-500',
+      day: dayjs('2025-04-03').valueOf(),
+      url: '',
+    },
+  ];
 }
 
 export default function ContextWrapper({ children }) {
@@ -37,9 +71,11 @@ export default function ContextWrapper({ children }) {
       setMonthIndex(smallCalendarMonth);
     }
   }, [smallCalendarMonth]);
+
   useEffect(() => {
     localStorage.setItem('savedEvents', JSON.stringify(savedEvents));
   }, [savedEvents]);
+
   return (
     <GlobalContext.Provider
       value={{

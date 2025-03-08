@@ -23,7 +23,7 @@ const Calendar = ({ month }) => {
   }
 
   return (
-    <div className="h-full flex-1 flex-col bg-white rounded-md">
+    <div className=" bg-white rounded-md">
       <header className="px-4 py-2 flex items-center justify-between">
         <div className="flex items-center gap-5">
           <button

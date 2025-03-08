@@ -17,7 +17,7 @@ const App = () => {
   return (
     <React.Fragment>
       {showEventModal && <EventModal />}
-      <div className="h-screen flex gap-5 bg-calendar-tile px-10 pt-5">
+      <div className="h-screen overflow-y-auto grid grid-cols-[30%_70%] items-start gap-5 bg-calendar-tile px-10 pt-5">
         <Sidebar />
         <Calendar month={currentMonth} />
       </div>
